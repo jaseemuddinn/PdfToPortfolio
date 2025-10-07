@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## PDF to Portfolio (Development Phase)
 
-## Getting Started
+Transform PDF or Word resumes into minimalist, shareable portfolio pages in seconds. Upload a resume, let the backend parse the content, and preview the generated layout immediately.
 
-First, run the development server:
+### Features
+
+- Drag-and-drop resume upload with client-side validation.
+- Server-side parsing for PDF/DOC/DOCX (via `pdf-parse` and `mammoth`).
+- Optional Gemini-assisted parsing to normalize tricky resume formats.
+- Structured portfolio data stored in MongoDB with shareable slugs.
+- Optional AWS S3 storage for original resume files.
+- Instant preview on the homepage plus a dedicated `/portfolio/[slug]` route.
+
+## Prerequisites
+
+- Node.js 18.18 or later.
+- Access to a MongoDB database (MongoDB Atlas recommended).
+- (Optional) AWS S3 bucket + credentials for storing uploaded resumes.
+- (Optional) Google Gemini API key for LLM-powered resume analysis.
+
+## Quick start
+
+1. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+2. Copy `.env.example` to `.env.local` and fill in the values:
+
+3. Start the dev server:
+
+   ```bash
+   npm run dev
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) and drop in a resume to generate a preview. Visit `/portfolio/<slug>` to view the persisted portfolio page.
+
+## Tests
+
+Automated tests are powered by Vitest (see `package.json`). Run them anytime with:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm test
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deployment notes
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Ensure environment variables are set in your hosting platform (Vercel, Netlify, etc.).
+- Provision MongoDB and optional S3 access before deploying.
+- Consider enabling HTTPS for any external callbacks or file uploads if hosting custom infrastructure.
